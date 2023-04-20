@@ -1,11 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import Priority from "../components/priorityField";
 import Filter from "../components/filter";
 import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Home: NextPage = () => {
+  const [openFilter, setOpenFilter] = useState(true);
   const [filters, setFilters] = useState<number[]>([0]);
   const [count, setCount] = useState(1);
 
@@ -28,32 +28,49 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto flex min-h-screen flex-col items-center justify-center bg-slate-50 text-gray-700">
-        <div className="w-1/2 min-w-max rounded-lg bg-white p-8 shadow">
-          <h1 className="mb-4 text-3xl font-bold text-black">Filters</h1>
-          {filters.map((filter) => {
-            console.log(filter);
-
-            return (
-              <div key={filter} className="mb-2 flex items-center gap-2">
+      <main className="container mx-auto flex min-h-screen flex-col items-center bg-slate-50 pt-12 text-gray-700">
+        {!openFilter ? (
+          <button
+            className="rounded-full px-4 py-2 font-bold hover:bg-gray-200"
+            onClick={() => setOpenFilter(true)}
+          >
+            Filter
+          </button>
+        ) : null}
+        {openFilter ? (
+          <div className="relative w-1/2 min-w-max rounded-lg bg-white p-4 shadow">
+            <button
+              className="absolute right-4 top-4 rounded-full hover:bg-gray-200"
+              onClick={() => {
+                setOpenFilter(false);
+                clearFilters();
+              }}
+            >
+              <CloseIcon />
+            </button>
+            <h1 className="mb-2 text-3xl font-bold text-black">Filters</h1>
+            {filters.map((filter) => (
+              <div key={filter} className="flex items-center gap-1">
                 {filter === 0 ? (
                   <label>Where</label>
                 ) : (
-                  <label className="bg-gray-200 text-gray-500 px-2 py-1 rounded-lg">AND</label>
+                  <label className="rounded-lg bg-gray-200 px-2 py-1 text-sm text-gray-500">
+                    AND
+                  </label>
                 )}
                 <Filter />
               </div>
-            );
-          })}
-          <div className="flex justify-between">
-            <button className="mt-2" onClick={addFilter}>
-              <p className="text-gray-600 underline">+ Add filter</p>
-            </button>
-            <button className="mt-2" onClick={clearFilters}>
-              <p className="text-gray-600 underline">Clear all filters</p>
-            </button>
+            ))}
+            <div className="flex justify-between">
+              <button className="mt-2" onClick={addFilter}>
+                <p className="text-gray-500">+ Add filter</p>
+              </button>
+              <button className="mt-2" onClick={clearFilters}>
+                <p className="text-gray-500">Clear all filters</p>
+              </button>
+            </div>
           </div>
-        </div>
+        ) : null}
       </main>
     </>
   );

@@ -10,7 +10,7 @@ function PriorityField() {
   return (
     <div>
       <IsSelect isStatus={isStatus} setIsStatus={setIsStatus} />
-      <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+      <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
         <InputLabel id="demo-select-small-label">Select option</InputLabel>
         <Select
           labelId="demo-select-small-label"

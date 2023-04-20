@@ -6,7 +6,7 @@ function ArchivedField() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+      <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
         <Select
           labelId="demo-select-small-label"
 					id="demo-select-small"

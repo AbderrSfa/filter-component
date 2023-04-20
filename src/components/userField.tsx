@@ -3,7 +3,7 @@ import IsSelect from "./isSelect";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-function WatcherField() {
+function UserField() {
   const [isStatus, setIsStatus] = useState("");
   const [watcher, setWatcher] = useState("");
 
@@ -28,10 +28,14 @@ function WatcherField() {
             <AccountCircleIcon color="secondary" />
             Berk
           </MenuItem>
+          <MenuItem value={"john"}>
+            <AccountCircleIcon color="warning" />
+            John
+          </MenuItem>
         </Select>
       </FormControl>
     </div>
   );
 }
 
-export default WatcherField;
+export default UserField;
