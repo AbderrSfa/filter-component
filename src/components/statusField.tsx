@@ -8,8 +8,8 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
 } from "@mui/material";
+import type { SelectChangeEvent } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

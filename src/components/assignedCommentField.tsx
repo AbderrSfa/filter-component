@@ -16,7 +16,9 @@ function AssignedCommentField() {
           onChange={(e) => setHasComment(e.target.value as string)}
         >
           <MenuItem value={"true"}>Has assigned comments</MenuItem>
-          <MenuItem value={"false"}>Doesn't have assigned comments</MenuItem>
+          <MenuItem value={"false"}>
+            Doesn&apos;t have assigned comments
+          </MenuItem>
         </Select>
       </FormControl>
     </div>
