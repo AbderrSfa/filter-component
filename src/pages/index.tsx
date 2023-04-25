@@ -1,17 +1,24 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Filter from "../components/filter";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import Input from "../components/input";
+import Group from "../components/group";
 
 const Home: NextPage = () => {
   const [openFilter, setOpenFilter] = useState(true);
-  const [filters, setFilters] = useState<number[]>([0]);
+  const [filters, setFilters] = useState<(number | [number])[]>([0]);
   const [count, setCount] = useState(1);
 
   const addFilter = () => {
     setCount((prevCount) => prevCount + 1);
     filters.push(count);
+    setFilters(filters);
+  };
+
+  const addGroup = () => {
+    setCount((prevCout) => prevCout + 1);
+    filters.push([0]);
     setFilters(filters);
   };
 
@@ -40,7 +47,7 @@ const Home: NextPage = () => {
         {openFilter ? (
           <div className="relative w-1/2 min-w-max rounded-lg bg-white p-4 shadow">
             <button
-              className="absolute right-4 top-4 rounded-full hover:bg-gray-200"
+              className="absolute right-4 top-4 rounded-full p-1 hover:bg-gray-200"
               onClick={() => {
                 setOpenFilter(false);
                 clearFilters();
@@ -49,24 +56,37 @@ const Home: NextPage = () => {
               <CloseIcon />
             </button>
             <h1 className="mb-2 text-3xl font-bold text-black">Filters</h1>
-            {filters.map((filter) => (
-              <div key={filter} className="flex items-center gap-1">
-                {filter === 0 ? (
-                  <label>Where</label>
-                ) : (
-                  <label className="rounded-lg bg-gray-200 px-2 py-1 text-sm text-gray-500">
-                    AND
-                  </label>
-                )}
-                <Filter />
+            {filters.map((filter, idx) => {
+              if (typeof filter === "number")
+                return <Input key={idx} filter={filter} />;
+              else
+                return (
+                  <div key={idx} className="flex items-start gap-4">
+                    <select className="mt-4 rounded-lg bg-gray-200 px-1 py-1 text-sm text-gray-500">
+                      <option>AND</option>
+                      <option>OR</option>
+                    </select>
+                    <Group />
+                  </div>
+                );
+            })}
+            <div className="mt-2 flex justify-between">
+              <div>
+                <button className="mt-2" onClick={addFilter}>
+                  <p className="rounded-full px-2 py-1 text-gray-500 hover:bg-gray-200">
+                    + Add filter
+                  </p>
+                </button>
+                <button className="mt-2" onClick={addGroup}>
+                  <p className="rounded-full px-2 py-1 text-gray-500 hover:bg-gray-200">
+                    + Add group
+                  </p>
+                </button>
               </div>
-            ))}
-            <div className="flex justify-between">
-              <button className="mt-2" onClick={addFilter}>
-                <p className="text-gray-500">+ Add filter</p>
-              </button>
               <button className="mt-2" onClick={clearFilters}>
-                <p className="text-gray-500">Clear all filters</p>
+                <p className="rounded-full px-2 py-1 text-gray-500 hover:bg-gray-200">
+                  Clear all filters
+                </p>
               </button>
             </div>
           </div>
