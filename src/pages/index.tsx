@@ -61,7 +61,7 @@ const Home: NextPage = () => {
                 return <Input key={idx} filter={filter} />;
               else
                 return (
-                  <div key={idx} className="flex items-start gap-4">
+                  <div key={idx} className="flex items-start gap-4 my-1">
                     <select className="mt-4 rounded-lg bg-gray-200 px-1 py-1 text-sm text-gray-500">
                       <option>AND</option>
                       <option>OR</option>

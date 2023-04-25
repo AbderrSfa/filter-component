@@ -6,7 +6,7 @@ type Props = {
 
 function Input({ filter }: Props) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 my-1">
       {filter === 0 ? (
         <label>Where</label>
       ) : (

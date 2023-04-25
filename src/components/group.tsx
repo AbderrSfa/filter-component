@@ -11,7 +11,7 @@ function Group() {
     setFilters(filters);
   };
   return (
-    <div>
+    <div className="border-2 p-2 rounded-lg">
       {filters.map((filter, idx) => {
         return <Input key={idx} filter={filter} />;
       })}
